@@ -1,5 +1,5 @@
 
-var minecraft = {};
+minecraft = {};
 
 minecraft.init = function () {
     minecraft.savedTile = "";
