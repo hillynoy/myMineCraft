@@ -26,11 +26,15 @@ minecraft.init = function () {
         ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"]
 
     ];
-
+    minecraft.canvas = $("<div/>");
+    minecraft.canvas.attr("id" , "canvas");
+    
     for (var i = 0; i < 20; i++) {
         var bigBox = $("<div/>");
         bigBox.addClass("row");
-        $('body').append(bigBox);
+        minecraft.canvas.append(bigBox);
+        $('body').append(minecraft.canvas);
+
         for (var j = 0; j < 20; j++) {
             var box = $("<div/>");
             box.addClass("box");
@@ -74,11 +78,11 @@ minecraft.init = function () {
                 }
 
                 else if ((clickedTool.attr("id") === "shovel") && (clickedTile.hasClass("grass"))) {
-                    minecraft.mineTile("grass"  ,clickedTile, storedTile);
+                    minecraft.mineTile("grass" ,clickedTile, storedTile);
                 }
 
                 else if ((clickedTool.attr("id") === "shovel") && (clickedTile.hasClass("dirt"))) {
-                    minecraft.mineTile("dirt"  ,clickedTile, storedTile);
+                    minecraft.mineTile("dirt" ,clickedTile, storedTile);
 
                 }else if (clickedTool.attr("id")=="storedTile" && clickedTile.hasClass("sky") && minecraft.savedTile != ""){
                     clickedTile.removeClass("sky").addClass(minecraft.savedTile);
@@ -99,27 +103,28 @@ minecraft.init = function () {
 };
 
 var createTools = function () {
-    var toolSet = $("<div/>");
-    toolSet.attr("id", "toolSet");
-    $("body").append(toolSet);
+    minecraft.toolSet = $("<div/>");
+    minecraft.toolSet.attr("id", "toolSet");
+    $("body").append(minecraft.toolSet);
 
     var toolTree = $("<div/>");
-    toolTree.attr("id", "axe");
-    toolTree.addClass("tool");
-    toolSet.append(toolTree);
+    minecraft.tool(toolTree, "axe");
 
     var toolRock = $("<div/>");
-    toolRock.attr("id", "pick");
-    toolRock.addClass("tool");
-    toolSet.append(toolRock);
+    minecraft.tool(toolRock, "pick");
 
     var toolGround = $("<div/>");
-    toolGround.attr("id", "shovel");
-    toolGround.addClass("tool");
-    toolSet.append(toolGround);
+    minecraft.tool(toolGround, "shovel");
+
 
     var store = $("<div/>").attr("id", "storedTile").addClass("store tool");
-    toolSet.append(store);
+    minecraft.toolSet.append(store);
+};
+
+minecraft.tool = function (toolType, toolId) {
+    toolType.attr("id", toolId);
+    toolType.addClass("tool");
+    minecraft.toolSet.append(toolType);
 };
 
 minecraft.mineTile = function(tileType ,clickedTile, storedTile){

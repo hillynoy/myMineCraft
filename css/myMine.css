@@ -1,11 +1,13 @@
 body {
     margin-top: 45px;
-    background-color: beige;
+    background-color: rgba(135, 206, 250, 0.26);
 }
 
+#canvas {
+}
 .box{
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     display:inline-block;
 }
 
@@ -68,8 +70,8 @@ body {
 }
 
 #toolSet {
-    transform: translateY(-170%);
-    left: 75%;
+    transform: translateY(-100%);
+    margin-left: 7%;
     position: absolute;
 }
 
@@ -99,6 +101,7 @@ body {
 }
 
 .logo img{
+    margin-left: 30%;
     height: 80px;
     margin-top: -24px;
     margin-bottom: 29px;
